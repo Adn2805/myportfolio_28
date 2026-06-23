@@ -94,7 +94,7 @@
     @keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
 
     /* SECTIONS */
-    .section{padding:100px 48px;max-width:1200px;margin:0 auto;}
+    .section{padding:100px 80px;max-width:1200px;margin:0 auto;}
     .section-label{font-family:var(--font-mono);font-size:.8rem;color:var(--primary);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
     .section-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:48px;line-height:1.2;}
     .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
@@ -139,9 +139,16 @@
     .skill-pill[data-cat="ai"]{--glow:var(--secondary);}
     .skill-pill[data-cat="web"]{--glow:#3B82F6;}
     .skill-pill[data-cat="db"]{--glow:#F59E0B;}
-    .skill-pill[data-cat="tools"]{--glow:var(--accent);}
+    .skill-pill[data-cat="cloud"]{--glow:#FF6B35;}
     .skill-pill[data-cat="embedded"]{--glow:#EC4899;}
     .skill-dot{width:6px;height:6px;border-radius:50%;background:var(--glow);flex-shrink:0;}
+    .soft-skills-grid{margin-top:40px;}
+    .soft-skills-title{font-family:var(--font-mono);font-size:0.9rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;text-align:center;}
+    .soft-skills-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
+    .soft-skill-card{display:inline-flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius-lg);font-family:var(--font-body);font-weight:500;font-size:0.9rem;color:#E2E8F0;transition:transform .3s,border-color .3s,box-shadow .3s;}
+    .soft-skill-card:hover{transform:translateY(-3px);border-color:#A78BFA;box-shadow:0 8px 20px rgba(167,139,250,.15);}
+    .soft-skill-card span{font-size:1.2rem;filter:drop-shadow(0 0 6px rgba(167,139,250,.5));}
+
 
     /* PROJECTS */
     .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
@@ -221,21 +228,29 @@
       .mobile-nav-toggle.active span::after{transform:rotate(-45deg) translate(4px,-5px);}
       .mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(5,8,16,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
       .mobile-menu.open{opacity:1;visibility:visible;}
-      .mobile-menu .nav-link{font-size:1.3rem;padding:12px 24px;}
+      .mobile-menu .nav-link{font-size:2rem;padding:12px 24px;}
       .hero{flex-direction:column;min-height:100vh;justify-content:flex-start;}
-      .hero-photo-wrap{position:relative;width:100%;height:45vh;-webkit-mask-image:none;mask-image:none;}
+      .hero-photo-wrap{position:relative;width:100%;height:55vh;-webkit-mask-image:none;mask-image:none;}
       .hero-photo-wrap img{width:100%;height:100%;transform:none;object-position:center top;}
       .hero-photo-wrap::before{width:100%;}
-      .hero-photo-wrap::after{background:linear-gradient(to bottom,transparent 10%,var(--bg) 95%);}
-      .hero-content{padding:0 24px 40px;margin-top:-60px;max-width:100%;z-index:5;}
-      .hero-name-line1,.hero-name-line2{font-size:clamp(3rem,14vw,5rem);}
-      .otw-badge{top:20px;left:20px;padding:6px 14px;font-size:0.75rem;}
+      .hero-photo-wrap::after{background:linear-gradient(to bottom,transparent 10%,rgba(5,8,16,1) 60%,var(--bg) 100%);}
+      .hero-content{padding:0 24px 40px;margin-top:-80px;max-width:100%;z-index:5;}
+      .hero-name-line1,.hero-name-line2{font-size:clamp(2.8rem,11vw,5rem);}
+      .hero-subtitle{font-size:1rem;letter-spacing:0.1em;}
+      .hero-cta-group{flex-direction:column;width:100%;}
+      .btn{width:100%;min-height:48px;justify-content:center;}
+      .otw-badge{top:16px;left:16px;padding:6px 14px;font-size:0.75rem;}
       .about-grid{grid-template-columns:1fr;gap:40px;}
       .projects-grid{grid-template-columns:1fr;}
-      .flip-card{height:380px;}
+      .flip-card{height:auto;min-height:260px;}
       .section{padding:60px 24px;}
-      .section-title{font-size:2rem;}
+      .section-title{font-size:clamp(1.8rem,7vw,3rem);}
       .term-body{padding:16px;font-size:0.75rem;}
+      .skills-filter{flex-wrap:nowrap;overflow-x:auto;padding-bottom:12px;white-space:nowrap;scrollbar-width:none;}
+      .skills-filter::-webkit-scrollbar{display:none;}
+      .skills-cloud{gap:8px;}
+      .skill-pill{padding:6px 12px;font-size:0.75rem;animation:none!important;transform:none!important;}
+      .skill-pill:hover{transform:none!important;}
       .cert-card{width:280px;padding:24px;}
       .contact-card{padding:32px 20px;}
       .contact-links{flex-direction:column;gap:16px;}
@@ -309,8 +324,9 @@
       <h2 class="section-title reveal" id="about-title">Designing intelligence,<br>one system at a time.</h2>
       <div class="about-grid">
         <div class="about-bio reveal">
-          <p>I engineer systems at the boundary of <span class="highlight">machine cognition</span> and <span class="highlight">hardware reality</span> &mdash; where a transformer's attention mechanism and a microcontroller's interrupt handler are equally native territory.</p>
-          <p>I compress complexity into clean, reasoned abstractions: <span class="highlight">RAG pipelines</span> that retrieve with precision, <span class="highlight">embedded protocols</span> hardened against adversarial replay, and interfaces that anticipate the user before they act.</p>
+          <p>I engineer systems at the boundary of <span class="highlight">machine cognition</span> and <span class="highlight">hardware reality</span>. A transformer's attention mechanism and a microcontroller's interrupt handler are equally native territory to me.</p>
+          <p>I compress complexity into clean, reasoned abstractions: <span class="highlight">RAG pipelines</span> built for precision, <span class="highlight">embedded protocols</span> hardened against adversarial replay, and interfaces that anticipate the user before they act.</p>
+          <p>Currently pursuing Integrated M.Tech Software Engineering at VIT Vellore, shipping real systems between semesters.</p>
         </div>
         <div class="term-panel reveal" id="term-panel" aria-label="Developer profile code">
           <div class="term-header">
@@ -342,8 +358,8 @@
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="ai">AI &amp; ML</button>
         <button class="filter-btn" data-filter="web">Web &amp; Frontend</button>
+        <button class="filter-btn" data-filter="cloud">Cloud &amp; DevOps</button>
         <button class="filter-btn" data-filter="embedded">Embedded</button>
-        <button class="filter-btn" data-filter="tools">DevOps &amp; Tools</button>
         <button class="filter-btn" data-filter="lang">Languages</button>
         <button class="filter-btn" data-filter="db">Databases</button>
       </div>
@@ -356,31 +372,50 @@
         <span class="skill-pill" data-cat="db" role="listitem" style="--float-dur:6.8s;--float-delay:.4s"><span class="skill-dot"></span>SQL</span>
         <span class="skill-pill" data-cat="db" role="listitem" style="--float-dur:5.3s;--float-delay:.7s"><span class="skill-dot"></span>Firebase</span>
         <span class="skill-pill" data-cat="db" role="listitem" style="--float-dur:6s;--float-delay:.15s"><span class="skill-dot"></span>MongoDB</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:5.7s;--float-delay:.6s"><span class="skill-dot"></span>Git</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:6.3s;--float-delay:.35s"><span class="skill-dot"></span>Docker</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:7.2s;--float-delay:.8s"><span class="skill-dot"></span>FAISS</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:5.5s;--float-delay:.45s"><span class="skill-dot"></span>Power BI</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:6.6s;--float-delay:.25s"><span class="skill-dot"></span>Nmap</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:5.9s;--float-delay:.55s"><span class="skill-dot"></span>Wireshark</span>
-        <span class="skill-pill" data-cat="tools" role="listitem" style="--float-dur:6.1s;--float-delay:.1s"><span class="skill-dot"></span>VS Code</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:5.4s;--float-delay:.65s"><span class="skill-dot"></span>React.js</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.7s;--float-delay:.2s"><span class="skill-dot"></span>Next.js</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.6s;--float-delay:.5s"><span class="skill-dot"></span>FastAPI</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:7.1s;--float-delay:.75s"><span class="skill-dot"></span>Streamlit</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.4s;--float-delay:.3s"><span class="skill-dot"></span>PyTorch</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.2s;--float-delay:.4s"><span class="skill-dot"></span>Scikit-Learn</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.9s;--float-delay:.6s"><span class="skill-dot"></span>Hugging Face</span>
-        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.8s;--float-delay:.15s"><span class="skill-dot"></span>SentenceTransformers</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.2s;--float-delay:.85s"><span class="skill-dot"></span>Zustand</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:5.5s;--float-delay:.5s"><span class="skill-dot"></span>Recharts</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.6s;--float-delay:.35s"><span class="skill-dot"></span>Framer Motion</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:5.3s;--float-delay:.7s"><span class="skill-dot"></span>HTML &amp; CSS</span>
-        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.8s;--float-delay:.2s"><span class="skill-dot"></span>REST APIs</span>
-        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:7s;--float-delay:.45s"><span class="skill-dot"></span>ESP32</span>
-        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:5.7s;--float-delay:.55s"><span class="skill-dot"></span>Arduino</span>
-        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:6.3s;--float-delay:.1s"><span class="skill-dot"></span>AES-128</span>
-        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:5.9s;--float-delay:.8s"><span class="skill-dot"></span>SHA-256</span>
-        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:6.5s;--float-delay:.3s"><span class="skill-dot"></span>Embedded C</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:5.7s;--float-delay:.6s"><span class="skill-dot"></span>Git</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:6.3s;--float-delay:.35s"><span class="skill-dot"></span>GitHub</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:7.2s;--float-delay:.8s"><span class="skill-dot"></span>Docker</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:5.5s;--float-delay:.45s"><span class="skill-dot"></span>AWS (EC2, S3)</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:6.6s;--float-delay:.25s"><span class="skill-dot"></span>Vercel</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:5.9s;--float-delay:.55s"><span class="skill-dot"></span>Linux</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:6.1s;--float-delay:.1s"><span class="skill-dot"></span>REST APIs</span>
+        <span class="skill-pill" data-cat="cloud" role="listitem" style="--float-dur:5.4s;--float-delay:.65s"><span class="skill-dot"></span>CI/CD Basics</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.7s;--float-delay:.2s"><span class="skill-dot"></span>React.js</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:5.6s;--float-delay:.5s"><span class="skill-dot"></span>Next.js</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:7.1s;--float-delay:.75s"><span class="skill-dot"></span>Zustand</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.4s;--float-delay:.3s"><span class="skill-dot"></span>Recharts</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:5.2s;--float-delay:.4s"><span class="skill-dot"></span>Framer Motion</span>
+        <span class="skill-pill" data-cat="web" role="listitem" style="--float-dur:6.9s;--float-delay:.6s"><span class="skill-dot"></span>HTML &amp; CSS</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.8s;--float-delay:.15s"><span class="skill-dot"></span>FastAPI</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.2s;--float-delay:.85s"><span class="skill-dot"></span>Streamlit</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.5s;--float-delay:.5s"><span class="skill-dot"></span>PyTorch</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.6s;--float-delay:.35s"><span class="skill-dot"></span>Scikit-Learn</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.3s;--float-delay:.7s"><span class="skill-dot"></span>Hugging Face</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.8s;--float-delay:.2s"><span class="skill-dot"></span>DistilBERT</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:7s;--float-delay:.45s"><span class="skill-dot"></span>FAISS</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.7s;--float-delay:.55s"><span class="skill-dot"></span>Faster-Whisper</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.3s;--float-delay:.1s"><span class="skill-dot"></span>RAG Systems</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.9s;--float-delay:.8s"><span class="skill-dot"></span>Prompt Engineering</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:6.5s;--float-delay:.3s"><span class="skill-dot"></span>NLP Pipelines</span>
+        <span class="skill-pill" data-cat="ai" role="listitem" style="--float-dur:5.4s;--float-delay:.6s"><span class="skill-dot"></span>Vector Search</span>
+        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:6.2s;--float-delay:.2s"><span class="skill-dot"></span>ESP32</span>
+        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:5.6s;--float-delay:.7s"><span class="skill-dot"></span>Arduino</span>
+        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:6.9s;--float-delay:.4s"><span class="skill-dot"></span>AES-128</span>
+        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:5.2s;--float-delay:.9s"><span class="skill-dot"></span>SHA-256</span>
+        <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:7.1s;--float-delay:.3s"><span class="skill-dot"></span>Embedded C</span>
+      </div>
+      
+      <div class="soft-skills-grid reveal">
+        <h3 class="soft-skills-title">Core Competencies</h3>
+        <div class="soft-skills-container">
+          <div class="soft-skill-card"><span>&#127959;</span> System Design Thinking</div>
+          <div class="soft-skill-card"><span>&#9889;</span> Rapid Prototyping</div>
+          <div class="soft-skill-card"><span>&#128221;</span> Technical Documentation</div>
+          <div class="soft-skill-card"><span>&#128256;</span> Cross-domain Problem Solving</div>
+          <div class="soft-skill-card"><span>&#128269;</span> Debugging Under Constraints</div>
+          <div class="soft-skill-card"><span>&#128300;</span> Independent Research</div>
+          <div class="soft-skill-card"><span>&#128259;</span> Iterative Building</div>
+        </div>
       </div>
     </section>
 
@@ -395,7 +430,7 @@
               <h3 class="project-name">NexusIntel</h3>
               <p class="project-oneliner">AI-powered market impact intelligence platform delivering real-time news-driven financial insights and stock-sector analytics.</p>
               <span class="project-date">Dec 2025 &mdash; Jan 2026</span>
-              <span class="flip-hint">&#8635; Hover to flip</span>
+              <span class="flip-hint">&#8635; Hover / Tap to flip</span>
             </div>
             <div class="flip-card-back">
               <h3 class="project-back-title">NexusIntel &mdash; Deep Dive</h3>
@@ -415,7 +450,7 @@
               <h3 class="project-name">ESP32 Secure Encryption</h3>
               <p class="project-oneliner">Hardware-level AES-128 + SHA-256 encryption system with session key rotation and replay attack protection.</p>
               <span class="project-date">Feb &mdash; Mar 2025</span>
-              <span class="flip-hint">&#8635; Hover to flip</span>
+              <span class="flip-hint">&#8635; Hover / Tap to flip</span>
             </div>
             <div class="flip-card-back">
               <h3 class="project-back-title">ESP32 Encryption &mdash; Deep Dive</h3>
@@ -435,7 +470,7 @@
               <h3 class="project-name">VisualDebate</h3>
               <p class="project-oneliner">AI credibility intelligence platform that transcribes video, identifies claims via NLP, and generates fact-checked rebuttals.</p>
               <span class="project-date">Mar &mdash; Apr 2026</span>
-              <span class="flip-hint">&#8635; Hover to flip</span>
+              <span class="flip-hint">&#8635; Hover / Tap to flip</span>
             </div>
             <div class="flip-card-back">
               <h3 class="project-back-title">VisualDebate &mdash; Deep Dive</h3>
@@ -512,7 +547,8 @@
 
     (function(){
       var canvas=document.getElementById('particle-canvas');if(!canvas)return;
-      var ctx=canvas.getContext('2d'),particles=[],mouse={x:-9999,y:-9999},N=80;
+      var N=window.innerWidth<768?40:80;
+      var ctx=canvas.getContext('2d'),particles=[],mouse={x:-9999,y:-9999};
       function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
       resize();window.addEventListener('resize',resize);
       canvas.parentElement.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
@@ -578,6 +614,7 @@
     })();
 
     (function(){
+      if('ontouchstart' in window)return;
       document.querySelectorAll('.magnetic-el,.magnetic-btn').forEach(function(el){el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;el.style.transform='translate('+(x*.18)+'px,'+(y*.18)+'px)';});el.addEventListener('mouseleave',function(){el.style.transition='transform .4s ease';el.style.transform='translate(0,0)';setTimeout(function(){el.style.transition='';},400);});});
     })();
 

@@ -149,6 +149,23 @@
     .soft-skill-card:hover{transform:translateY(-3px);border-color:#A78BFA;box-shadow:0 8px 20px rgba(167,139,250,.15);}
     .soft-skill-card svg{color:#A78BFA;filter:drop-shadow(0 0 4px rgba(167,139,250,.4));flex-shrink:0;}
 
+    /* MOBILE SKILLS ACCORDION — hidden on desktop */
+    .mobile-skills-accordion{display:none;flex-direction:column;gap:12px;width:100%;}
+    .mob-skill-group{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:rgba(13,17,23,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s;}
+    .mob-skill-group.open{border-color:rgba(0,245,196,.2);}
+    .mob-skill-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
+    .mob-skill-header-left{display:flex;align-items:center;gap:12px;}
+    .mob-skill-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .mob-skill-cat-name{font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--text);letter-spacing:.02em;}
+    .mob-skill-count{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:var(--radius-pill);}
+    .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .3s ease, color .3s;flex-shrink:0;}
+    .mob-skill-group.open .mob-skill-chevron{transform:rotate(180deg);color:var(--primary);}
+    .mob-skill-body{max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;}
+    .mob-skill-group.open .mob-skill-body{padding:0 16px 18px;}
+    .mob-skill-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .mob-skill-pills .skill-pill{display:flex!important;align-items:center;gap:6px;padding:10px 14px;font-size:.74rem;font-family:var(--font-mono);font-weight:500;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-pill);animation:none!important;transform:none!important;transition:border-color .3s;justify-content:center;text-align:center;}
+    .mob-skill-pills .skill-pill:hover{transform:none!important;}
+
 
     /* PROJECTS */
     .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
@@ -246,11 +263,9 @@
       .section{padding:60px 24px;}
       .section-title{font-size:clamp(1.8rem,7vw,3rem);}
       .term-body{padding:16px;font-size:0.75rem;}
-      .skills-filter{flex-wrap:nowrap;overflow-x:auto;padding-bottom:16px;white-space:nowrap;scrollbar-width:none;}
-      .skills-filter::-webkit-scrollbar{display:none;}
-      .skills-cloud{gap:14px; margin-top:10px;}
-      .skill-pill{padding:10px 18px;font-size:0.72rem;animation:none!important;transform:none!important; letter-spacing: 0.02em;}
-      .skill-pill:hover{transform:none!important;}
+      .skills-filter{display:none!important;}
+      .skills-cloud{display:none!important;}
+      .mobile-skills-accordion{display:flex!important;}
       .soft-skills-grid{margin-top: 64px;}
       .soft-skills-container{flex-direction: column; gap: 16px; width: 100%; padding: 0 10px;}
       .soft-skill-card{padding: 18px 24px; justify-content: flex-start; width: 100%; font-size: 0.95rem; border-radius: 16px;}
@@ -406,6 +421,97 @@
         <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:6.9s;--float-delay:.4s"><span class="skill-dot"></span>AES-128</span>
         <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:5.2s;--float-delay:.9s"><span class="skill-dot"></span>SHA-256</span>
         <span class="skill-pill" data-cat="embedded" role="listitem" style="--float-dur:7.1s;--float-delay:.3s"><span class="skill-dot"></span>Embedded C</span>
+      </div>
+
+      <!-- Mobile-only collapsible skills accordion -->
+      <div class="mobile-skills-accordion reveal">
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:var(--primary)"></span><span class="mob-skill-cat-name">Languages</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">5</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="lang"><span class="skill-dot"></span>Java</span>
+            <span class="skill-pill" data-cat="lang"><span class="skill-dot"></span>Python</span>
+            <span class="skill-pill" data-cat="lang"><span class="skill-dot"></span>JavaScript</span>
+            <span class="skill-pill" data-cat="lang"><span class="skill-dot"></span>C</span>
+            <span class="skill-pill" data-cat="lang"><span class="skill-dot"></span>C++</span>
+          </div></div>
+        </div>
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:var(--secondary)"></span><span class="mob-skill-cat-name">AI & ML</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">12</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>FastAPI</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Streamlit</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>PyTorch</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Scikit-Learn</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Hugging Face</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>DistilBERT</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>FAISS</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Faster-Whisper</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>RAG Systems</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Prompt Eng.</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>NLP Pipelines</span>
+            <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Vector Search</span>
+          </div></div>
+        </div>
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:#3B82F6"></span><span class="mob-skill-cat-name">Web & Frontend</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">6</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>React.js</span>
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>Next.js</span>
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>Zustand</span>
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>Recharts</span>
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>Framer Motion</span>
+            <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>HTML & CSS</span>
+          </div></div>
+        </div>
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:#FF6B35"></span><span class="mob-skill-cat-name">Cloud & DevOps</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">7</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>Git</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>GitHub</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>Docker</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>AWS (EC2, S3)</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>Vercel</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>Linux</span>
+            <span class="skill-pill" data-cat="cloud"><span class="skill-dot"></span>REST APIs</span>
+          </div></div>
+        </div>
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:#F59E0B"></span><span class="mob-skill-cat-name">Databases</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">3</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>SQL</span>
+            <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>Firebase</span>
+            <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>MongoDB</span>
+          </div></div>
+        </div>
+        <div class="mob-skill-group">
+          <div class="mob-skill-header" role="button" tabindex="0" aria-expanded="false">
+            <div class="mob-skill-header-left"><span class="mob-skill-cat-dot" style="background:#EC4899"></span><span class="mob-skill-cat-name">Embedded & IoT</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span class="mob-skill-count">6</span><svg class="mob-skill-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </div>
+          <div class="mob-skill-body"><div class="mob-skill-pills">
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>ESP32</span>
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>Arduino</span>
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>AES-128</span>
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>SHA-256</span>
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>Embedded C</span>
+            <span class="skill-pill" data-cat="embedded"><span class="skill-dot"></span>CI/CD Basics</span>
+          </div></div>
+        </div>
       </div>
       
       <div class="soft-skills-grid reveal">
@@ -662,6 +768,32 @@
 
     (function(){
       document.querySelectorAll('.btn').forEach(function(btn){btn.addEventListener('click',function(e){var r=btn.getBoundingClientRect(),rip=document.createElement('span'),size=Math.max(r.width,r.height);rip.className='ripple';rip.style.width=rip.style.height=size+'px';rip.style.left=e.clientX-r.left-size/2+'px';rip.style.top=e.clientY-r.top-size/2+'px';btn.appendChild(rip);rip.addEventListener('animationend',function(){rip.remove();});});});
+    })();
+
+    /* Mobile skills accordion toggle */
+    (function(){
+      var groups=document.querySelectorAll('.mob-skill-group');
+      groups.forEach(function(g){
+        var header=g.querySelector('.mob-skill-header');
+        var body=g.querySelector('.mob-skill-body');
+        header.addEventListener('click',function(){
+          var isOpen=g.classList.contains('open');
+          /* close all others */
+          groups.forEach(function(og){
+            og.classList.remove('open');
+            og.querySelector('.mob-skill-header').setAttribute('aria-expanded','false');
+            og.querySelector('.mob-skill-body').style.maxHeight=null;
+          });
+          if(!isOpen){
+            g.classList.add('open');
+            header.setAttribute('aria-expanded','true');
+            body.style.maxHeight=body.scrollHeight+'px';
+          }
+        });
+        header.addEventListener('keydown',function(e){
+          if(e.key==='Enter'||e.key===' '){e.preventDefault();header.click();}
+        });
+      });
     })();
   </script>
 </body>

@@ -151,7 +151,7 @@
 
     /* MOBILE SKILLS ACCORDION — hidden on desktop */
     .mobile-skills-accordion{display:none;flex-direction:column;gap:12px;width:100%;}
-    .mob-skill-group{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:rgba(13,17,23,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s;}
+    .mob-skill-group{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:rgba(13,17,23,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s;will-change:border-color;}
     .mob-skill-group.open{border-color:rgba(0,245,196,.2);}
     .mob-skill-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
     .mob-skill-header-left{display:flex;align-items:center;gap:12px;}
@@ -160,9 +160,9 @@
     .mob-skill-count{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:var(--radius-pill);}
     .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .3s ease, color .3s;flex-shrink:0;}
     .mob-skill-group.open .mob-skill-chevron{transform:rotate(180deg);color:var(--primary);}
-    .mob-skill-body{max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;}
-    .mob-skill-group.open .mob-skill-body{padding:0 16px 18px;}
-    .mob-skill-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .mob-skill-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);padding:0 16px;will-change:max-height;}
+    .mob-skill-body.expanded{overflow:visible;}
+    .mob-skill-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:20px;}
     .mob-skill-pills .skill-pill{display:flex!important;align-items:center;gap:6px;padding:10px 14px;font-size:.74rem;font-family:var(--font-mono);font-weight:500;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-pill);animation:none!important;transform:none!important;transition:border-color .3s;justify-content:center;text-align:center;}
     .mob-skill-pills .skill-pill:hover{transform:none!important;}
 
@@ -273,7 +273,10 @@
       .contact-card{padding:32px 20px;}
       .contact-links{flex-direction:column;gap:16px;}
       .custom-cursor,.cursor-ring{display:none!important;}
-      body{cursor:auto;}a,button{cursor:pointer;}
+      body{cursor:auto;-webkit-overflow-scrolling:touch;}a,button{cursor:pointer;}
+      .section,.hero,.about-grid,.soft-skills-grid,.projects-grid{transform:translateZ(0);}
+      .noise-overlay{display:none!important;}
+      .mob-skill-group{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(13,17,23,.7);}
     }
     @media(max-width:480px){
       .hero-cta-group{flex-direction:column;}
@@ -339,12 +342,12 @@
   <main id="main-content">
     <section class="section" id="about" aria-labelledby="about-title">
       <p class="section-label reveal">About Me</p>
-      <h2 class="section-title reveal" id="about-title">Designing intelligence,<br>one system at a time.</h2>
+      <h2 class="section-title reveal" id="about-title">Building things that<br>actually work.</h2>
       <div class="about-grid">
         <div class="about-bio reveal">
-          <p>I engineer systems at the intersection of <span class="highlight">machine cognition</span> and <span class="highlight">hardware reality</span>.</p>
-          <p>I build precise <span class="highlight">RAG pipelines</span>, secure <span class="highlight">embedded protocols</span>, and intuitive interfaces.</p>
-          <p>Currently pursuing Integrated M.Tech Software Engineering at VIT Vellore, shipping real systems between semesters.</p>
+          <p>I'm a software engineering student at <span class="highlight">VIT Vellore</span> who likes building end-to-end &mdash; from training an NLP model to wiring up an ESP32.</p>
+          <p>Most of my work sits between <span class="highlight">full-stack web apps</span>, <span class="highlight">AI pipelines</span>, and <span class="highlight">embedded systems</span>. I pick up whatever the project needs and figure the rest out along the way.</p>
+          <p>Currently finishing my Integrated M.Tech, actively looking for roles where I can ship real products and learn from strong engineering teams.</p>
         </div>
         <div class="term-panel reveal" id="term-panel" aria-label="Developer profile code">
           <div class="term-header">
@@ -776,18 +779,32 @@
       groups.forEach(function(g){
         var header=g.querySelector('.mob-skill-header');
         var body=g.querySelector('.mob-skill-body');
+        /* After expand transition ends, switch to auto so content is never clipped */
+        body.addEventListener('transitionend',function(e){
+          if(e.propertyName==='max-height'&&g.classList.contains('open')){
+            body.style.maxHeight='none';
+            body.classList.add('expanded');
+          }
+        });
         header.addEventListener('click',function(){
           var isOpen=g.classList.contains('open');
           /* close all others */
           groups.forEach(function(og){
+            var ob=og.querySelector('.mob-skill-body');
+            if(og.classList.contains('open')){
+              ob.classList.remove('expanded');
+              ob.style.maxHeight=ob.scrollHeight+'px';
+              ob.offsetHeight;/* force reflow */
+              ob.style.maxHeight='0px';
+            }
             og.classList.remove('open');
             og.querySelector('.mob-skill-header').setAttribute('aria-expanded','false');
-            og.querySelector('.mob-skill-body').style.maxHeight=null;
           });
           if(!isOpen){
             g.classList.add('open');
             header.setAttribute('aria-expanded','true');
-            body.style.maxHeight=body.scrollHeight+'px';
+            body.classList.remove('expanded');
+            body.style.maxHeight=body.scrollHeight+40+'px';/* +40 for padding */
           }
         });
         header.addEventListener('keydown',function(e){

@@ -147,20 +147,18 @@
     .soft-skills-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
     .soft-skill-card{display:inline-flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius-lg);font-family:var(--font-body);font-weight:500;font-size:0.9rem;color:#E2E8F0;transition:transform .3s,border-color .3s,box-shadow .3s;}
     .soft-skill-card:hover{transform:translateY(-3px);border-color:#A78BFA;box-shadow:0 8px 20px rgba(167,139,250,.15);}
-    .soft-skill-card svg{color:#A78BFA;filter:drop-shadow(0 0 4px rgba(167,139,250,.4));flex-shrink:0;}
-
-    /* MOBILE SKILLS ACCORDION — hidden on desktop */
-    .mobile-skills-accordion{display:none;flex-direction:column;gap:12px;width:100%;}
+    .soft-skill-card svg{color:#A78BFA;filter:drop-shadow(0 0 4px rgba(167,139,250,.4));flex-sh    /* MOBILE SKILLS ACCORDION - hidden on desktop */
+    .mobile-skills-accordion{display:none;flex-direction:column;gap:16px;width:100%;}
     .mob-skill-group{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:rgba(13,17,23,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s;will-change:border-color;}
     .mob-skill-group.open{border-color:rgba(0,245,196,.2);}
-    .mob-skill-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
+    .mob-skill-header{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
     .mob-skill-header-left{display:flex;align-items:center;gap:12px;}
     .mob-skill-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
     .mob-skill-cat-name{font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--text);letter-spacing:.02em;}
     .mob-skill-count{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:var(--radius-pill);}
-    .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .3s ease, color .3s;flex-shrink:0;}
+    .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .4s cubic-bezier(.4,0,.2,1), color .3s;flex-shrink:0;}
     .mob-skill-group.open .mob-skill-chevron{transform:rotate(180deg);color:var(--primary);}
-    .mob-skill-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1);will-change:grid-template-rows;}
+    .mob-skill-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1);will-change:grid-template-rows;}plate-rows;}
     .mob-skill-group.open .mob-skill-body{grid-template-rows:1fr;}
     .mob-skill-pills{min-height:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 24px 16px;}
     .mob-skill-pills .skill-pill{display:flex!important;align-items:center;gap:6px;padding:10px 14px;font-size:.74rem;font-family:var(--font-mono);font-weight:500;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-pill);animation:none!important;transform:none!important;transition:border-color .3s;justify-content:center;text-align:center;}
@@ -538,6 +536,29 @@
       <p class="section-label reveal">Featured Work</p>
       <h2 class="section-title reveal" id="projects-title">Projects that push boundaries.</h2>
       <div class="projects-grid">
+        <article class="flip-card reveal" aria-label="ADAS False Positive Engine project">
+          <div class="flip-card-inner" tabindex="0" role="button" aria-label="Flip for details">
+            <div class="flip-card-front">
+              <div class="card-badges"><span class="project-category cat-ai" style="background:rgba(236,72,153,.2);color:#EC4899;">AI &middot; Backend</span><span class="card-tag-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Auto Tech</span></div>
+              <h3 class="project-name">ADAS Engine</h3>
+              <p class="project-oneliner">Automated diagnostic classifier and dashboard for ADAS false positive analysis and sensor fusion metrics.</p>
+              <span class="project-date">Jun 2026 &mdash; Jul 2026</span>
+              <span class="flip-hint">&#8635; Hover / Tap to flip</span>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="project-back-title">ADAS Engine &mdash; Deep Dive</h3>
+              <ul class="project-details">
+                <li>Analyzed 500+ ADAS events using FastAPI and Pandas to compute IoU and sensor fusion metrics</li>
+                <li>Built an automated diagnostic classifier grouping conflicting sensor data into 5 specific root causes</li>
+                <li>Developed a React dashboard for real-time hyperparameter tuning, reducing simulated false positives by 23%</li>
+              </ul>
+              <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">FastAPI</span><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Pandas</span></div>
+              <div class="project-links" style="margin-top:auto; display:flex; gap:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,.05);">
+                <a href="https://github.com/Adn2805/ADAS-False-Positive-Engine" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:6px; transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </article>
         <article class="flip-card reveal" aria-label="NexusIntel project">
           <div class="flip-card-inner" tabindex="0" role="button" aria-label="Flip for details">
             <div class="flip-card-front">

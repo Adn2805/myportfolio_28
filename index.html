@@ -147,7 +147,9 @@
     .soft-skills-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
     .soft-skill-card{display:inline-flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius-lg);font-family:var(--font-body);font-weight:500;font-size:0.9rem;color:#E2E8F0;transition:transform .3s,border-color .3s,box-shadow .3s;}
     .soft-skill-card:hover{transform:translateY(-3px);border-color:#A78BFA;box-shadow:0 8px 20px rgba(167,139,250,.15);}
-    .soft-skill-card svg{color:#A78BFA;filter:drop-shadow(0 0 4px rgba(167,139,250,.4));flex-sh    /* MOBILE SKILLS ACCORDION - hidden on desktop */
+    .soft-skill-card svg{color:#A78BFA;filter:drop-shadow(0 0 4px rgba(167,139,250,.4));flex-shrink:0;}
+
+    /* MOBILE SKILLS ACCORDION - hidden on desktop */
     .mobile-skills-accordion{display:none;flex-direction:column;gap:12px;width:100%;}
     .mob-skill-group{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:rgba(13,17,23,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .3s;will-change:border-color;}
     .mob-skill-group.open{border-color:rgba(0,245,196,.2);}
@@ -158,9 +160,9 @@
     .mob-skill-count{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:var(--radius-pill);}
     .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .3s ease, color .3s;flex-shrink:0;}
     .mob-skill-group.open .mob-skill-chevron{transform:rotate(180deg);color:var(--primary);}
-    .mob-skill-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1);will-change:grid-template-rows;}plate-rows;}
-    .mob-skill-group.open .mob-skill-body{grid-template-rows:1fr;}
-    .mob-skill-pills{min-height:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 24px 16px;}
+    .mob-skill-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);padding:0 16px;will-change:max-height;}
+    .mob-skill-body.expanded{overflow:visible;}
+    .mob-skill-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:20px;}
     .mob-skill-pills .skill-pill{display:flex!important;align-items:center;gap:6px;padding:10px 14px;font-size:.74rem;font-family:var(--font-mono);font-weight:500;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-pill);animation:none!important;transform:none!important;transition:border-color .3s;justify-content:center;text-align:center;}
     .mob-skill-pills .skill-pill:hover{transform:none!important;}
 
@@ -803,16 +805,32 @@
       groups.forEach(function(g){
         var header=g.querySelector('.mob-skill-header');
         var body=g.querySelector('.mob-skill-body');
+        /* After expand transition ends, switch to auto so content is never clipped */
+        body.addEventListener('transitionend',function(e){
+          if(e.propertyName==='max-height'&&g.classList.contains('open')){
+            body.style.maxHeight='none';
+            body.classList.add('expanded');
+          }
+        });
         header.addEventListener('click',function(){
           var isOpen=g.classList.contains('open');
           /* close all others */
           groups.forEach(function(og){
+            var ob=og.querySelector('.mob-skill-body');
+            if(og.classList.contains('open')){
+              ob.classList.remove('expanded');
+              ob.style.maxHeight=ob.scrollHeight+'px';
+              ob.offsetHeight;/* force reflow */
+              ob.style.maxHeight='0px';
+            }
             og.classList.remove('open');
             og.querySelector('.mob-skill-header').setAttribute('aria-expanded','false');
           });
           if(!isOpen){
             g.classList.add('open');
             header.setAttribute('aria-expanded','true');
+            body.classList.remove('expanded');
+            body.style.maxHeight=body.scrollHeight+40+'px';/* +40 for padding */
           }
         });
         header.addEventListener('keydown',function(e){

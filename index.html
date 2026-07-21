@@ -160,9 +160,9 @@
     .mob-skill-count{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:var(--radius-pill);}
     .mob-skill-chevron{width:18px;height:18px;color:var(--text-muted);transition:transform .3s ease, color .3s;flex-shrink:0;}
     .mob-skill-group.open .mob-skill-chevron{transform:rotate(180deg);color:var(--primary);}
-    .mob-skill-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);padding:0 16px;will-change:max-height;}
-    .mob-skill-body.expanded{overflow:visible;}
-    .mob-skill-pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:20px;}
+    .mob-skill-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1);will-change:grid-template-rows;}
+    .mob-skill-group.open .mob-skill-body{grid-template-rows:1fr;}
+    .mob-skill-pills{min-height:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 24px 16px;}
     .mob-skill-pills .skill-pill{display:flex!important;align-items:center;gap:6px;padding:10px 14px;font-size:.74rem;font-family:var(--font-mono);font-weight:500;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-pill);animation:none!important;transform:none!important;transition:border-color .3s;justify-content:center;text-align:center;}
     .mob-skill-pills .skill-pill:hover{transform:none!important;}
 
@@ -782,32 +782,16 @@
       groups.forEach(function(g){
         var header=g.querySelector('.mob-skill-header');
         var body=g.querySelector('.mob-skill-body');
-        /* After expand transition ends, switch to auto so content is never clipped */
-        body.addEventListener('transitionend',function(e){
-          if(e.propertyName==='max-height'&&g.classList.contains('open')){
-            body.style.maxHeight='none';
-            body.classList.add('expanded');
-          }
-        });
         header.addEventListener('click',function(){
           var isOpen=g.classList.contains('open');
           /* close all others */
           groups.forEach(function(og){
-            var ob=og.querySelector('.mob-skill-body');
-            if(og.classList.contains('open')){
-              ob.classList.remove('expanded');
-              ob.style.maxHeight=ob.scrollHeight+'px';
-              ob.offsetHeight;/* force reflow */
-              ob.style.maxHeight='0px';
-            }
             og.classList.remove('open');
             og.querySelector('.mob-skill-header').setAttribute('aria-expanded','false');
           });
           if(!isOpen){
             g.classList.add('open');
             header.setAttribute('aria-expanded','true');
-            body.classList.remove('expanded');
-            body.style.maxHeight=body.scrollHeight+40+'px';/* +40 for padding */
           }
         });
         header.addEventListener('keydown',function(e){

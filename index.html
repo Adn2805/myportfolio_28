@@ -103,7 +103,7 @@
     /* ABOUT */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
     .about-bio{display:flex;flex-direction:column;gap:20px;}
-    .about-bio p{font-size:1.08rem;color:var(--text);line-height:1.9;opacity:.92;}
+    .about-bio p{font-size:1.08rem;color:var(--text);line-height:1.9;opacity:.92;text-align:justify;}
     .about-bio .highlight{color:var(--primary);font-weight:600;}
     .about-bio .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
     .about-bio .tag{padding:5px 14px;border-radius:var(--radius-pill);font-family:var(--font-mono);font-size:.72rem;border:1px solid rgba(0,245,196,.18);color:var(--primary);background:rgba(0,245,196,.06);}
@@ -329,8 +329,11 @@
       <div class="hero-name-rule reveal" aria-hidden="true"></div>
       <div class="hero-subtitle-container reveal" aria-live="polite">
         <span class="hero-subtitle active" id="sub-0">Full-Stack Developer</span>
-        <span class="hero-subtitle" id="sub-1">AI Systems Engineer</span>
-        <span class="hero-subtitle" id="sub-2">IoT Security Builder</span>
+        <span class="hero-subtitle" id="sub-1">AI Engineer</span>
+        <span class="hero-subtitle" id="sub-2">IoT Builder</span>
+        <span class="hero-subtitle" id="sub-3">Prompt Engineer</span>
+        <span class="hero-subtitle" id="sub-4">Solutions Architect</span>
+        <span class="hero-subtitle" id="sub-5">Data Engineer</span>
       </div>
       <div class="hero-cta-group reveal">
         <a href="#projects" class="btn btn-primary magnetic-btn">View My Work</a>
@@ -345,9 +348,9 @@
       <h2 class="section-title reveal" id="about-title">Building things that<br>actually work.</h2>
       <div class="about-grid">
         <div class="about-bio reveal">
-          <p>I'm a Software Engineering student at <span class="highlight">VIT Vellore</span> passionate about building at the intersection of <span class="highlight">AI and full-stack development</span>. I enjoy understanding problems, questioning conventional approaches, and identifying gaps where technology can make a meaningful difference.</p>
-          <p>I build with AI not because it's trendy, but because it's a powerful tool when it genuinely improves a solution. My goal isn't just to build software, it's to build something that's <span class="highlight">practical, purposeful, and worth using</span>.</p>
-          <p>Currently in the final year of my Integrated M.Tech at VIT Vellore, looking for opportunities to build, learn, and grow as a software engineer.</p>
+          <p>I'm a Software Engineering student at <span class="highlight">VIT Vellore</span> passionate about AI and full-stack development. I enjoy understanding problems, identifying meaningful gaps, and building practical solutions where AI creates real value not just where it can be used.</p>
+          <p>My goal isn't just to build software, it's to build something that's <span class="highlight">practical, purposeful, and worth using</span>.</p>
+          <p>Currently in the final year of my Integrated M.Tech, looking for opportunities to build, learn, and grow as a software engineer.</p>
         </div>
         <div class="term-panel reveal" id="term-panel" aria-label="Developer profile code">
           <div class="term-header">
@@ -723,7 +726,7 @@
     })();
 
     (function(){
-      var subs=[document.getElementById('sub-0'),document.getElementById('sub-1'),document.getElementById('sub-2')],cur=0;
+      var subs=[document.getElementById('sub-0'),document.getElementById('sub-1'),document.getElementById('sub-2'),document.getElementById('sub-3'),document.getElementById('sub-4'),document.getElementById('sub-5')],cur=0;
       setInterval(function(){subs[cur].classList.remove('active');subs[cur].classList.add('exit');setTimeout(function(){subs.forEach(function(s){s.classList.remove('exit');});},500);cur=(cur+1)%subs.length;subs[cur].classList.add('active');},3000);
     })();
 

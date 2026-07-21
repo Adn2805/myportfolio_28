@@ -108,22 +108,22 @@
     .about-bio .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
     .about-bio .tag{padding:5px 14px;border-radius:var(--radius-pill);font-family:var(--font-mono);font-size:.72rem;border:1px solid rgba(0,245,196,.18);color:var(--primary);background:rgba(0,245,196,.06);}
 
-    /* TERMINAL */
-    .term-panel{background:#0a0e1a;border:1px solid rgba(0,245,196,.15);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 0 40px rgba(0,245,196,.06),0 20px 60px rgba(0,0,0,.4);}
-    .term-header{display:flex;align-items:center;gap:8px;padding:12px 20px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.05);}
-    .term-dot{width:12px;height:12px;border-radius:50%;}
-    .term-dot.red{background:#ff5f57;}.term-dot.yellow{background:#febc2e;}.term-dot.green{background:#28c840;}
-    .term-title{margin-left:auto;margin-right:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);}
-    .term-body{padding:24px 28px;font-family:var(--font-mono);font-size:.8rem;line-height:2;min-height:240px;overflow-x:auto;}
-    .term-line{display:flex;gap:10px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;white-space:nowrap;}
-    .term-line.visible{opacity:1;transform:translateY(0);}
-    .term-prompt{color:var(--primary);flex-shrink:0;}
-    .term-cmd{color:#7dd3fc;}
-    .term-key{color:#94a3b8;}
-    .term-val{color:var(--text);}
-    .term-val.mint{color:var(--primary);}.term-val.violet{color:#a78bfa;}.term-val.orange{color:var(--accent);}.term-val.green{color:#4ade80;}
-    .term-cursor{display:inline-block;width:8px;height:1em;background:var(--primary);margin-left:2px;vertical-align:text-bottom;animation:blink .8s step-end infinite;}
-    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+    /* ENGINEERING CARD */
+    .engineering-card{background:rgba(13,17,23,.6);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(0,245,196,.04),0 20px 60px rgba(0,0,0,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-family:var(--font-mono);width:100%;max-width:480px;margin:0 auto;}
+    .eng-header{display:flex;align-items:center;gap:10px;padding:14px 20px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.05);color:var(--text-muted);}
+    .eng-title{font-size:.8rem;font-weight:500;}
+    .eng-body{padding:28px 24px;display:flex;flex-direction:column;gap:24px;}
+    .eng-section-title{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);font-weight:600;margin:0 0 12px 0;}
+    .eng-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;margin:0;}
+    .eng-list li{font-size:.85rem;color:var(--text);display:flex;align-items:flex-start;gap:12px;line-height:1.5;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;}
+    .eng-list li.visible{opacity:1;transform:translateY(0);}
+    .eng-num{color:var(--primary);font-size:.75rem;font-weight:600;opacity:.8;margin-top:2px;}
+    .eng-divider{border:none;border-top:1px dashed rgba(255,255,255,.1);margin:0;}
+    .eng-focus-tags{display:flex;flex-wrap:wrap;gap:8px;}
+    .eng-tag{padding:6px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-pill);font-size:.75rem;color:var(--text);font-weight:500;}
+    .eng-status{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text);font-weight:500;}
+    .pulse-dot{width:8px;height:8px;background:var(--primary);border-radius:50%;box-shadow:0 0 10px var(--primary);animation:pulse 2s infinite;flex-shrink:0;}
+    @keyframes pulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(0,245,196,.6);}70%{opacity:.6;box-shadow:0 0 0 6px rgba(0,245,196,0);}100%{opacity:1;box-shadow:0 0 0 0 rgba(0,245,196,0);}}
 
     /* SKILLS */
     .skills-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
@@ -351,24 +351,39 @@
           <p>I'm a final-year Integrated M.Tech Software Engineering student at <span class="highlight">VIT Vellore</span> passionate about building intelligent, end-to-end systems. I enjoy understanding problems, identifying overlooked opportunities, and combining AI, data, and software engineering to create practical solutions with real-world impact where technology creates real value.</p>
           <p>My goal isn't just to build software, it's to build something that's <span class="highlight">practical, purposeful, and worth using</span>.</p>
         </div>
-        <div class="term-panel reveal" id="term-panel" aria-label="Developer profile code">
-          <div class="term-header">
-            <span class="term-dot red" aria-hidden="true"></span>
-            <span class="term-dot yellow" aria-hidden="true"></span>
-            <span class="term-dot green" aria-hidden="true"></span>
-            <span class="term-title">system_core.py</span>
+        <div class="engineering-card reveal" id="eng-panel" aria-label="Engineering Principles">
+          <div class="eng-header">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="eng-title">engineering_principles.md</span>
           </div>
-          <div class="term-body" id="term-body" aria-live="polite">
-            <div class="term-line" id="tl-0"><span class="term-key">class</span><span class="term-val mint">&nbsp;MohammedAdnan</span><span class="term-val">(FullStack, AI_Engineer):</span></div>
-            <div class="term-line" id="tl-1"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-key">def</span><span class="term-cmd">&nbsp;__init__</span><span class="term-val">(self):</span></div>
-            <div class="term-line" id="tl-2"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-val">self.location = </span><span class="term-val orange">"Tamil Nadu, India"</span></div>
-            <div class="term-line" id="tl-3"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-val">self.education = </span><span class="term-val orange">"M.Tech Software Engineering @ VIT"</span></div>
-            <div class="term-line" id="tl-4"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-val">self.focus = [</span><span class="term-val orange">"Machine Cognition"</span><span class="term-val">, </span><span class="term-val orange">"Hardware Reality"</span><span class="term-val">]</span></div>
-            <div class="term-line" id="tl-5"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-key">def</span><span class="term-cmd">&nbsp;build_system</span><span class="term-val">(self, challenge):</span></div>
-            <div class="term-line" id="tl-6"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-key">if</span><span class="term-val">&nbsp;challenge.type == </span><span class="term-val orange">"Complexity"</span><span class="term-val">:</span></div>
-            <div class="term-line" id="tl-7"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-key">return</span><span class="term-val">&nbsp;self.compress_to_clean_abstraction()</span></div>
-            <div class="term-line" id="tl-8"><span class="term-prompt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-key">return</span><span class="term-val">&nbsp;DeployableSolution()</span></div>
-            <div class="term-line" id="tl-9"><span class="term-prompt"></span><span class="term-cursor" aria-hidden="true"></span></div>
+          <div class="eng-body">
+            <div>
+              <h3 class="eng-section-title">Engineering Principles</h3>
+              <ul class="eng-list">
+                <li class="eng-line"><span class="eng-num">01</span> Understand before building</li>
+                <li class="eng-line"><span class="eng-num">02</span> Solve the right problem</li>
+                <li class="eng-line"><span class="eng-num">03</span> Keep things simple</li>
+                <li class="eng-line"><span class="eng-num">04</span> Let AI assist, not replace thinking</li>
+                <li class="eng-line"><span class="eng-num">05</span> Build software people enjoy using</li>
+              </ul>
+            </div>
+            <hr class="eng-divider">
+            <div>
+              <h3 class="eng-section-title">Current Focus</h3>
+              <div class="eng-focus-tags">
+                <span class="eng-tag">AI</span>
+                <span class="eng-tag">Full Stack</span>
+                <span class="eng-tag">Data</span>
+                <span class="eng-tag">System Design</span>
+              </div>
+            </div>
+            <hr class="eng-divider">
+            <div>
+              <h3 class="eng-section-title">Status</h3>
+              <div class="eng-status">
+                <span class="pulse-dot"></span> Building &middot; Learning &middot; Improving
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -758,8 +773,8 @@
     })();
 
     (function(){
-      var panel=document.getElementById('term-panel');if(!panel)return;
-      var lines=panel.querySelectorAll('.term-line'),triggered=false;
+      var panel=document.getElementById('eng-panel');if(!panel)return;
+      var lines=panel.querySelectorAll('.eng-line'),triggered=false;
       var obs=new IntersectionObserver(function(entries){if(!entries[0].isIntersecting||triggered)return;triggered=true;lines.forEach(function(line,i){setTimeout(function(){line.classList.add('visible');},i*130);});obs.disconnect();},{threshold:.3});
       obs.observe(panel);
     })();
